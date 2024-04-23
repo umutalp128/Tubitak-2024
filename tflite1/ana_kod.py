@@ -91,7 +91,7 @@ while  True :
     #telefon tespitleri ayarlanan değeri geçtiğinde değeri sıfırla ve arduinoya veriyi gönder
     if count == count2:
         print("telefon algilandi")
-        #serial1.lora()
+        serial1.lora()
         time.sleep(30)
         count2 = 0
 
