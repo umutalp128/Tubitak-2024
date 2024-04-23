@@ -5,7 +5,7 @@ import numpy as np
 import time
 from threading import Thread
 import json
-import importlib.util
+from tensorflow.lite.python.interpreter import Interpreter
 
 openedConfig = open("config.json","r")#ayar dosyasını oku
 configRead = openedConfig.read()
@@ -49,16 +49,8 @@ GRAPH_NAME = 'detect.tflite'
 LABELMAP_NAME = 'labelmap.txt'
 minimum_esik = 0.5
 imW, imH = 1280, 720
-
-# kurulu olan tensorflow lite modülünü  tespit et ve import et 
-modul = importlib.util.find_spec('tflite_runtime')
-if modul:
-    from tflite_runtime.interpreter import Interpreter
-else:
-    from tensorflow.lite.python.interpreter import Interpreter
  
 #tensorflow lite interpreterine gerekli değerleri ver örneğin tensorflow lite modelinin dosya yolu
-
 yol = os.getcwd()
 PATH_TO_CKPT = os.path.join(yol,MODEL_ISMI,GRAPH_NAME)
 PATH_TO_LABELS = os.path.join(yol,MODEL_ISMI,LABELMAP_NAME)
