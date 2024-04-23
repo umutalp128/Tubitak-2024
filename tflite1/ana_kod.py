@@ -6,14 +6,14 @@ import time
 from threading import Thread
 import json
 from tensorflow.lite.python.interpreter import Interpreter
-
+MODEL_ISMI = 'Sample_TFLite_model' #coco_ssd_mobilenet_v1_1.0_quant_2018_06_29
 openedConfig = open("config.json","r")#ayar dosyasını oku
 configRead = openedConfig.read()
-
 configParsed = json.loads(configRead) 
 
 count  = int(configParsed["trigger"]) #tetik değerini al
 count2 = 0
+
 class VideoStream: # çok çekirdekli görüntü aktarımı :
     def __init__(self,resolution=(640,480),framerate=30):
       
@@ -44,21 +44,14 @@ class VideoStream: # çok çekirdekli görüntü aktarımı :
     def stop(self):
         self.stopped = True
 
-MODEL_ISMI = 'Sample_TFLite_model' #coco_ssd_mobilenet_v1_1.0_quant_2018_06_29
-GRAPH_NAME = 'detect.tflite'
-LABELMAP_NAME = 'labelmap.txt'
-minimum_esik = 0.5
-imW, imH = 1280, 720
- 
-#tensorflow lite interpreterine gerekli değerleri ver örneğin tensorflow lite modelinin dosya yolu
 yol = os.getcwd()
-PATH_TO_CKPT = os.path.join(yol,MODEL_ISMI,GRAPH_NAME)
-PATH_TO_LABELS = os.path.join(yol,MODEL_ISMI,LABELMAP_NAME)
+PATH_TO_CKPT = os.path.join(yol,MODEL_ISMI,'detect.tflite')
+PATH_TO_LABELS = os.path.join(yol,MODEL_ISMI,'labelmap.txt')
 
 with open(PATH_TO_LABELS, 'r') as f:
     labels = [line.strip() for line in f.readlines()]
 if labels[0] == '???':
-     del(labels[0])
+    del(labels[0])
 
 interpreter = Interpreter(model_path=PATH_TO_CKPT)
 interpreter.allocate_tensors()
@@ -69,9 +62,8 @@ height = input_details[0]['shape'][1]
 width = input_details[0]['shape'][2]
 
 classes_idx, scores_idx = 1, 2
-
 #görüntü aktarımını başlat
-videostream = VideoStream(resolution=(imW,imH),framerate=30).start()
+videostream = VideoStream(resolution=(1280, 720),framerate=30).start()
 time.sleep(1)
 #anlık olarak görüntüyü al ve işle :
 while  True :
@@ -90,7 +82,7 @@ while  True :
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0] 
     #tespit edilen cismleri bul ve ekrana yazdır
     for i in range(len(scores)):
-        if ((scores[i] > minimum_esik) and (scores[i] <= 1.0)):       
+        if ((scores[i] > 0.5) and (scores[i] <= 1.0)):       
             cisim_ismi = labels[int(classes[i])]
             #tespit edilen cisim telefon ise tespit edilen sayısını arttır
             print(cisim_ismi)
