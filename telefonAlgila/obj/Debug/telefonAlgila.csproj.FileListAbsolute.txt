@@ -1,0 +1,10 @@
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\bin\Debug\telefonAlgila.exe.config
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\bin\Debug\telefonAlgila.exe
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\bin\Debug\telefonAlgila.pdb
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.csproj.AssemblyReference.cache
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.Form1.resources
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.Properties.Resources.resources
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.csproj.GenerateResource.cache
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.csproj.CoreCompileInputs.cache
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.exe
+C:\Users\Umut\Documents\GitHub\Tubitak-2024\telefonAlgila\obj\Debug\telefonAlgila.pdb

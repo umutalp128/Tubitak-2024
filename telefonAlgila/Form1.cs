@@ -44,7 +44,7 @@ namespace telefonAlgila
             //tabloyu ayarla
             tablo = richTextBox1;
             dtbl.Columns.Add("Araç", typeof(string));
-            dtbl.Columns.Add("Tespit Sayısı", typeof(int));
+            dtbl.Columns.Add("Tespit Sayisi", typeof(int));
             dtbl.Rows.Add("Test Odasi 1", 0);
             tablo.Rtf = InsertTableInRichTextBox(dtbl);
             //dosya kayıt nesnesini ayarla
@@ -180,7 +180,7 @@ namespace telefonAlgila
             row[1] = (int)row[1] + 1;
             tablo.Rtf = InsertTableInRichTextBox(dtbl);
             //veri eklendi ise telefon tespit edilmiştir , bu sebepten dolayı mail gönder 
-            SendMail("Test Odasi 1", (int)row[1]);
+            //SendMail("Test Odasi 1", (int)row[1]);
             Thread.Sleep(2500);
         }
 

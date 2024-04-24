@@ -77,6 +77,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(591, 398);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
+            this.richTextBox1.UseWaitCursor = true;
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // saveFileDialog1
@@ -103,7 +104,11 @@
             this.Controls.Add(this.close);
             this.Controls.Add(this.open);
             this.Controls.Add(this.portSelector);
+            this.HelpButton = true;
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "telefon tespiti programı";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
