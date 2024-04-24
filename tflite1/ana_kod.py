@@ -41,9 +41,6 @@ class VideoStream: # çok çekirdekli görüntü aktarımı :
     def read(self):
         return self.frame
 
-    def stop(self):
-        self.stopped = True
-
 yol = os.getcwd()
 PATH_TO_CKPT = os.path.join(yol,MODEL_ISMI,'detect.tflite')
 PATH_TO_LABELS = os.path.join(yol,MODEL_ISMI,'labelmap.txt')
@@ -65,11 +62,17 @@ classes_idx, scores_idx = 1, 2
 #görüntü aktarımını başlat
 videostream = VideoStream(resolution=(1280, 720),framerate=30).start()
 time.sleep(1)
+outname = output_details[0]['name']
+
+if ('StatefulPartitionedCall' in outname): # This is a TF2 model
+    classes_idx, scores_idx = 3, 0
+else: # This is a TF1 model
+    classes_idx, scores_idx = 1, 2
+
 #anlık olarak görüntüyü al ve işle :
 while  True :
     #görüntünün alınması ve yeniden boyutlandırılması
-    frame1 = videostream.read()
-    frame = frame1.copy()
+    frame = videostream.read()
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame_resized = cv2.resize(frame_rgb, (width, height))
     input_data = np.expand_dims(frame_resized, axis=0)
@@ -88,11 +91,9 @@ while  True :
             print(cisim_ismi)
             if cisim_ismi == "cell phone":
                 count2 = count2 + 1
-    #telefon tespitleri ayarlanan değeri geçtiğinde değeri sıfırla ve arduinoya veriyi gönder
+    #telefon tespitleri ayarlanan değeri geçtiğinde değeri sıfırla ve raspberry pi pico'ya veriyi gönder
     if count == count2:
         print("telefon algilandi")
         serial1.lora()
         time.sleep(30)
         count2 = 0
-
-videostream.stop()
